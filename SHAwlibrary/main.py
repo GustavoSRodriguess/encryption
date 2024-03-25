@@ -13,9 +13,9 @@ h = hashlib.new("SHA256")
 h.update(user_input.encode())
 input_hash = h.hexdigest()
 if(pwd_hash == input_hash):
-    print("bolas")
+    print("teste1")
 else:
-    print("penis")
+    print("teste2")
 
 
 
