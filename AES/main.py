@@ -312,6 +312,6 @@ for i in range(1,11):
     printMatrix(initialState)
 print("-----------Result----------")
 print("Original Message")
-printCipher(finalState)
+print(plainText)
 print("The cipher text is")
-printCipher(initialState)
+printCipher(finalState)
