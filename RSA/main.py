@@ -61,21 +61,17 @@ def decrypt(char, N, d):
     return str((int(char) ** d) % N).zfill(2)
 
 def split(word):
-    return [char for char in word]
+    return list(word)
 
 def encrypt_msg(msg, N, e):
-    text = msg.lower().split()
+    text = split(msg.lower())
     encrypted = []
     
-    for word in text:
-        chars = split(word)
-        
-        encrypt_char = [encrypt(alphabet_e[char], N, e) for char in chars]
-        
-        encrypted_word = " ".join(encrypt_char)
-        encrypted.append(encrypted_word)
-    encrypted = f"{encrypt(alphabet_e[' '], N, e)}".join(encrypted)
-    return encrypted
+    for char in text:
+        if char in alphabet_e:
+            encrypted.append(encrypt(alphabet_e[char], N, e))
+    
+    return " ".join(encrypted)
 
 def decrypt_msg(msg, N, d):
     encrypted = msg.split()
