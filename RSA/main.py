@@ -37,6 +37,10 @@ def gcd (a, b):
         return gcd(b, a % b)
     
 def prepare_rsa(p, q):
+    if p == 2 and q == 3 or p == 3 and q == 2:
+        raise ValueError("p and q cannot be 2 and 3.")
+    if p == q:
+        raise ValueError("p and q cannot be the same prime number.")
     N = p * q
     
     N0 = (p-1) * (q-1)
@@ -94,7 +98,8 @@ def option():
         2 - Descriptografar mensagem de um arquivo\n\
         3 - Criptografar mensagem no terminal\n\
         4 - Descriptografar mensagem no terminal\n\
-        5 - Sair\n")
+        5 - Criptografar mensagem do terminal para arquivo\n\
+        6 - Sair\n")
 
 
 
@@ -115,7 +120,7 @@ while True:
             print(f"Chave privada: \nN: {N}\nd: {d}\n")
         case '1':
             N = int(input("Insira a chave puvblic key N: "))
-            e = int(input("Insira a chave puvblic key e: "))
+            e = int(input("Insira a chave puvblic key d: "))
             print()
             
             with open('input.txt', 'r') as fin:
@@ -153,6 +158,16 @@ while True:
             
             print(f'\nmensagem descriptografada: \n {decrypt_msg(msg, N, d)}\n')
         case '5':
+            N = int(input("Insira a chave puvblic key N: "))
+            e = int(input("Insira a chave puvblic key e: "))
+            print()
+            msg = input('Insira a mensagem para criptografar: \n')
+            
+            with open('encrypted.txt', 'w') as fout:
+                fout.write(encrypt_msg(msg, N, e))
+                
+            print('Arquivo criptografado')
+        case '6':
             sair = input("Deseja memso sair?: \n\
                 'Y' para sim\n\
                 'N' para nao\n\n").upper()
